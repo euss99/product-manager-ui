@@ -32,6 +32,7 @@ export default tseslint.config(
       "simple-import-sort/imports": "error",
       indent: ["error", 2],
       quotes: ["error", "double"],
+      semi: ["error", "always"]
     },
   },
 )
