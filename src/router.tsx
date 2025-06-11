@@ -3,6 +3,7 @@ import {
   createBrowserRouter
 } from "react-router";
 
+import { action as newProductAction } from "@/actions/newProduct";
 import Layout from "@/layouts/Layout";
 
 const ProductsView = lazy(() => import("@/views/Products"));
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/new-product",
         element: <NewProductView />,
+        action: newProductAction,
       },
     ],
   },
