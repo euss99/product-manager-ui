@@ -1,6 +1,6 @@
 import { type ActionFunctionArgs, redirect } from "react-router";
 
-import { addProduct } from "@/services/ProductServices";
+import { addProduct } from "@/utils/services/ProductServices";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { safeParse } from "valibot";
 
-import { DraftProductSchema } from "@/schemas";
+import { DraftProductSchema } from "@/utils/schemas";
 
 const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDliOTQwMy03NzE0LTQxY2QtOGZlYy0zYzM4OTM0ZjM1MTEiLCJpYXQiOjE3NDk2ODMwNjUsImV4cCI6MTc0OTc2OTQ2NX0.4N8mbWEFnwkjc5U_j8PFZPNPoY6lEwmQQK8wGvkPRtQ";
 
