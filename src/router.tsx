@@ -5,6 +5,7 @@ import {
 
 import Layout from "@/layouts/Layout";
 import { action as newProductAction } from "@/utils/actions/newProduct";
+import { loader as productsLoader } from "@/utils/loaders/productsLoader";
 
 const ProductsView = lazy(() => import("@/views/Products"));
 const NewProductView = lazy(() => import("@/views/NewProduct"));
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <ProductsView />,
+        loader: productsLoader,
       },
       {
         path: "/new-product",

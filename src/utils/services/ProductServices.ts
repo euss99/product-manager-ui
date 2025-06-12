@@ -1,7 +1,7 @@
 import axios from "axios";
 import { safeParse } from "valibot";
 
-import { DraftProductSchema } from "@/utils/schemas";
+import { DraftProductSchema, ProductsSchema } from "@/utils/schemas";
 
 const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDliOTQwMy03NzE0LTQxY2QtOGZlYy0zYzM4OTM0ZjM1MTEiLCJpYXQiOjE3NDk2ODMwNjUsImV4cCI6MTc0OTc2OTQ2NX0.4N8mbWEFnwkjc5U_j8PFZPNPoY6lEwmQQK8wGvkPRtQ";
 
@@ -31,6 +31,27 @@ export const addProduct = async ( data: ProductData ) => {
         },
       }
       );
+    } else {
+      throw new Error("Invalid data");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProducts = async () => {
+  try {
+    const url = `${import.meta.env.VITE_API_URL}/api/products`;
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    });
+
+    const result = safeParse(ProductsSchema, data);
+
+    if (result.success) {
+      return result.output;
     } else {
       throw new Error("Invalid data");
     }
