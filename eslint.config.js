@@ -30,9 +30,10 @@ export default tseslint.config(
       "no-unused-vars": "off",
       "simple-import-sort/exports": "error",
       "simple-import-sort/imports": "error",
+      "object-curly-spacing": ["error", "always"],
       indent: ["error", 2],
       quotes: ["error", "double"],
-      semi: ["error", "always"]
+      semi: ["error", "always"],
     },
   },
 )
