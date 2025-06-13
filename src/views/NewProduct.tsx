@@ -1,7 +1,7 @@
 import { Link, useActionData } from "react-router";
 
-import ErrorMessage from "@/components/ErrorMessage";
-import ProductForm from "@/components/ProductForm";
+import ErrorMessage from "@/components/shared/ErrorMessage";
+import ProductForm from "@/components/products/ProductForm";
 
 const NewProduct = () => {
   const error = useActionData();
