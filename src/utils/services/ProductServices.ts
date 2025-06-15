@@ -1,15 +1,16 @@
-import axios from "axios";
 import { safeParse } from "valibot";
 
+import {
+  createProductUseCase,
+  getProductsUseCase,
+} from "@/utils/dependencies/productDependencies";
 import { DraftProductSchema, ProductsSchema } from "@/utils/schemas";
-
-const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDliOTQwMy03NzE0LTQxY2QtOGZlYy0zYzM4OTM0ZjM1MTEiLCJpYXQiOjE3NDk4MzY1MDAsImV4cCI6MTc0OTkyMjkwMH0.wzNNAAjJIMY8gsUee7GNO09hezJYJYetJPaIAWB0T-g";
 
 type ProductData = {
   [key: string]: FormDataEntryValue;
-}
+};
 
-export const addProduct = async ( data: ProductData ) => {
+export const addProduct = async (data: ProductData) => {
   try {
     const result = safeParse(DraftProductSchema, {
       name: data.name,
@@ -18,19 +19,11 @@ export const addProduct = async ( data: ProductData ) => {
     });
 
     if (result.success) {
-      const url = `${import.meta.env.VITE_API_URL}/api/products`;
-      await axios.post(url, {
+      await createProductUseCase.execute({
         name: result.output.name,
         description: result.output.description,
         price: result.output.price,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-      }
-      );
+      });
     } else {
       throw new Error("Invalid data");
     }
@@ -41,14 +34,8 @@ export const addProduct = async ( data: ProductData ) => {
 
 export const getProducts = async () => {
   try {
-    const url = `${import.meta.env.VITE_API_URL}/api/products`;
-    const { data } = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    });
-
-    const result = safeParse(ProductsSchema, data);
+    const products = await getProductsUseCase.execute();
+    const result = safeParse(ProductsSchema, products);
 
     if (result.success) {
       return result.output;
